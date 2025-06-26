@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#667eea" />
+    <meta
+      name="description"
+      content="EduGenAI - Advanced AI-powered lesson generator creating premium, accessible educational content based on Universal Design for Learning principles. Generate comprehensive, grade-appropriate lesson plans in seconds."
+    />
+    <meta name="keywords" content="AI lesson generator, educational technology, UDL, Universal Design for Learning, teaching tools, lesson planning, accessible education, EdTech" />
+    <meta name="author" content="EduGenAI" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://edugenai.com/" />
+    <meta property="og:title" content="EduGenAI - AI-Powered Lesson Generator" />
+    <meta property="og:description" content="Create premium, accessible lesson plans with advanced AI. Generate comprehensive educational content following UDL principles in seconds." />
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://edugenai.com/" />
+    <meta property="twitter:title" content="EduGenAI - AI-Powered Lesson Generator" />
+    <meta property="twitter:description" content="Create premium, accessible lesson plans with advanced AI. Generate comprehensive educational content following UDL principles in seconds." />
+    <meta property="twitter:image" content="%PUBLIC_URL%/twitter-image.png" />
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Progressive Web App -->
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "EduGenAI",
+      "description": "AI-powered lesson generator for creating accessible educational content",
+      "url": "https://edugenai.com",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "EduGenAI",
+        "description": "Advanced AI for Education"
+      },
+      "featureList": [
+        "AI-powered lesson generation",
+        "Universal Design for Learning compliance",
+        "Grade-appropriate content adaptation",
+        "Interactive presentation creation",
+        "Accessibility features",
+        "Real-time content customization"
+      ]
+    }
+    </script>
+
+    <title>EduGenAI - AI-Powered Lesson Generator | Create Premium Educational Content</title>
+
+    <!-- Performance optimization -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  </head>
+  <body>
+    <noscript>
+      <div style="padding: 2rem; text-align: center; font-family: Arial, sans-serif;">
+        <h2>🚀 EduGenAI Requires JavaScript</h2>
+        <p>You need to enable JavaScript to experience the full power of EduGenAI's AI-driven lesson generation.</p>
+        <p>Please enable JavaScript in your browser settings and refresh the page.</p>
+      </div>
+    </noscript>
+    <div id="root"></div>
+
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+              console.log('SW registered: ', registration);
+            })
+            .catch(function(registrationError) {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>
