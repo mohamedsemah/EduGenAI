@@ -208,7 +208,7 @@ const PipelineInterface = () => {
         </div>
 
         <form onSubmit={handleFormSubmit} className="lesson-form">
-          <div className="form-section">
+          <div className="form-section full-width">
             <h3>Basic Information</h3>
             <div className="form-row">
               <div className="form-group">
@@ -644,8 +644,26 @@ const PipelineInterface = () => {
         }
 
         .lesson-form {
-          max-width: 800px;
-          margin: 0 auto;
+          width: 100%;
+          margin: 0;
+          display: block;
+        }
+
+        .form-section.full-width {
+          background: linear-gradient(135deg, rgba(102, 126, 234, 0.02), rgba(118, 75, 162, 0.02));
+          border: 1px solid rgba(102, 126, 234, 0.1);
+          border-radius: 16px;
+          padding: 2.5rem;
+          width: 100%;
+          grid-column: 1 / -1;
+        }
+
+        .form-section {
+          background: linear-gradient(135deg, rgba(102, 126, 234, 0.02), rgba(118, 75, 162, 0.02));
+          border: 1px solid rgba(102, 126, 234, 0.1);
+          border-radius: 16px;
+          padding: 2.5rem;
+          width: 100%;
         }
 
         .form-section h3 {
@@ -653,35 +671,40 @@ const PipelineInterface = () => {
           margin-bottom: 2rem;
           padding-bottom: 0.5rem;
           border-bottom: 2px solid #e5e7eb;
+          font-size: 1.4rem;
+          font-weight: 700;
         }
 
         .form-row {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 2rem;
+          gap: 2.5rem;
           margin-bottom: 2rem;
         }
 
         .form-group {
-          margin-bottom: 1.5rem;
+          margin-bottom: 2rem;
         }
 
         .form-group label {
           display: block;
           font-weight: 600;
           color: #374151;
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.8rem;
+          font-size: 1rem;
         }
 
         .form-group input,
         .form-group select,
         .form-group textarea {
           width: 100%;
-          padding: 1rem;
+          padding: 1.2rem 1.4rem;
           border: 2px solid #e5e7eb;
-          border-radius: 8px;
+          border-radius: 10px;
           font-family: inherit;
+          font-size: 1rem;
           transition: all 0.3s ease;
+          background: rgba(255, 255, 255, 0.8);
         }
 
         .form-group input:focus,
@@ -976,4 +999,4 @@ const PipelineInterface = () => {
   );
 };
 
-export default PipelineInterface;
+export default PipelineInterface;:wq
