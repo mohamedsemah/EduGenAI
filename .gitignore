@@ -63,3 +63,4 @@ coverage.xml
 *.tmp
 *.temp
 backend/.env
+backend/static/
