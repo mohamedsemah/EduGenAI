@@ -39,19 +39,6 @@ const LessonForm = () => {
     if (error) setError(null);
   };
 
-  const handleComplexityChange = (e) => {
-    const value = parseInt(e.target.value);
-    setFormData(prevData => ({
-      ...prevData,
-      complexity_level: value
-    }));
-
-    // Update estimated time based on complexity
-    const baseTime = 30;
-    const complexityMultiplier = 1 + (value - 5) * 0.1;
-    setEstimatedTime(Math.round(baseTime * complexityMultiplier));
-  };
-
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -149,22 +136,6 @@ const LessonForm = () => {
     "Graduate"
   ];
 
-  const getComplexityDescription = (level) => {
-    const descriptions = {
-      1: "Very Basic - Foundational concepts only",
-      2: "Basic - Simple examples and explanations",
-      3: "Introductory - Some detail with clear examples",
-      4: "Moderate - Good detail with multiple examples",
-      5: "Standard - Comprehensive coverage (recommended)",
-      6: "Detailed - Advanced examples and applications",
-      7: "In-depth - Complex applications and analysis",
-      8: "Advanced - Sophisticated concepts and connections",
-      9: "Expert - Nuanced understanding required",
-      10: "Research Level - Highly advanced content"
-    };
-    return descriptions[level] || "Standard";
-  };
-
   const getGradeCategory = (gradeLevel) => {
     const grade = gradeLevel.toLowerCase();
     if (['k', '1', '2', '3', '4', '5'].includes(grade) || grade.includes('elementary')) {
@@ -177,12 +148,6 @@ const LessonForm = () => {
       return 'University Level';
     }
     return 'Not specified';
-  };
-
-  const getComplexityColor = (level) => {
-    if (level <= 3) return '#43e97b';
-    if (level <= 6) return '#667eea';
-    return '#f5576c';
   };
 
   return (
@@ -208,7 +173,7 @@ const LessonForm = () => {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="lesson-form">
+      <form onSubmit={handleSubmit} className="lesson-form-single-column">
         <div className="form-section">
           <h3 className="section-title">
             <span className="section-icon">📚</span>
@@ -357,58 +322,6 @@ const LessonForm = () => {
 
         <div className="form-section">
           <h3 className="section-title">
-            <span className="section-icon">⚙️</span>
-            AI Configuration
-          </h3>
-
-          <div className="complexity-section">
-            <label htmlFor="complexity_level">
-              Content Complexity Level:
-              <span className="complexity-value" style={{color: getComplexityColor(formData.complexity_level)}}>
-                {formData.complexity_level}/10
-              </span>
-            </label>
-
-            <div className="complexity-slider-container">
-              <input
-                type="range"
-                id="complexity_level"
-                name="complexity_level"
-                min="1"
-                max="10"
-                value={formData.complexity_level}
-                onChange={handleComplexityChange}
-                className="complexity-slider"
-                style={{
-                  background: `linear-gradient(to right, ${getComplexityColor(formData.complexity_level)} 0%, ${getComplexityColor(formData.complexity_level)} ${(formData.complexity_level-1)*11.11}%, #e5e7eb ${(formData.complexity_level-1)*11.11}%, #e5e7eb 100%)`
-                }}
-              />
-              <div className="complexity-labels">
-                <span>Basic</span>
-                <span>Standard</span>
-                <span>Advanced</span>
-              </div>
-            </div>
-
-            <div className="complexity-description">
-              <div className="complexity-badge" style={{backgroundColor: getComplexityColor(formData.complexity_level)}}>
-                <strong>{getComplexityDescription(formData.complexity_level)}</strong>
-              </div>
-              <div className="time-estimate">
-                <span className="time-icon">⏱️</span>
-                Estimated generation time: ~{estimatedTime}s
-              </div>
-            </div>
-
-            <small>
-              Adjust the depth and sophistication of content. Higher levels include more detailed explanations,
-              complex examples, and advanced applications.
-            </small>
-          </div>
-        </div>
-
-        <div className="form-section">
-          <h3 className="section-title">
             <span className="section-icon">📎</span>
             Supporting Materials
           </h3>
@@ -517,6 +430,21 @@ const LessonForm = () => {
           </div>
         </div>
       </form>
+
+      <style jsx>{`
+        .lesson-form-single-column {
+          display: block;
+          gap: 0;
+        }
+        
+        .lesson-form-single-column .form-section {
+          margin-bottom: 3rem;
+        }
+        
+        .lesson-form-single-column .form-actions {
+          margin-top: 2rem;
+        }
+      `}</style>
 
       {loading && (
         <LoadingSpinner

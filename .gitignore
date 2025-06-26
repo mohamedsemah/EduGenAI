@@ -32,6 +32,7 @@ build/
 .env.development.local
 .env.test.local
 .env.production.local
+package-lock.json
 
 # --- Common ---
 .DS_Store
@@ -61,3 +62,4 @@ coverage.xml
 ~$*
 *.tmp
 *.temp
+backend/.env
