@@ -97,55 +97,55 @@ function App() {
           </div>
         </div>
 
-        <p className="hero-description">
-          Create premium, accessible course content with our
-          <span className="highlight"> staged refinement process</span> powered by AI and
-          <span className="highlight"> Universal Design for Learning</span> principles
-        </p>
+<div className="hero-description">
+          Create comprehensive, research-based course content with our
+          <span className="highlight"> college-focused AI pipeline</span> powered by
+          <span className="highlight"> Universal Design for Learning</span> principles for higher education
+        </div>
 
         <div className="pipeline-overview">
           <div className="overview-title">
-            <span className="overview-icon">🔄</span>
-            <span>Staged Enhancement Pipeline</span>
+            <span className="overview-icon">🎓</span>
+            <span>College-Level Enhancement Pipeline</span>
           </div>
           <div className="pipeline-steps">
             <div className="pipeline-step">
               <div className="step-icon">📝</div>
               <div className="step-info">
                 <div className="step-name">Setup</div>
-                <div className="step-desc">Define lesson parameters</div>
+                <div className="step-desc">Define course parameters & level</div>
               </div>
             </div>
             <div className="pipeline-arrow">→</div>
             <div className="pipeline-step">
               <div className="step-icon">📚</div>
               <div className="step-info">
-                <div className="step-name">Baseline</div>
-                <div className="step-desc">Review & edit initial content</div>
+                <div className="step-name">Academic Baseline</div>
+                <div className="step-desc">Review research-based content</div>
               </div>
             </div>
             <div className="pipeline-arrow">→</div>
             <div className="pipeline-step">
               <div className="step-icon">🎯</div>
               <div className="step-info">
-                <div className="step-name">Engagement</div>
-                <div className="step-desc">Add UDL engagement features</div>
+                <div className="step-name">Adult Engagement</div>
+                <div className="step-desc">Add career-relevant motivations</div>
               </div>
             </div>
             <div className="pipeline-arrow">→</div>
             <div className="pipeline-step">
               <div className="step-icon">👁️</div>
               <div className="step-info">
-                <div className="step-name">Representation</div>
-                <div className="step-desc">Add multiple representation modes</div>
+                <div className="step-name">Academic Representation</div>
+                <div className="step-desc">Multiple scholarly formats</div>
               </div>
             </div>
             <div className="pipeline-arrow">→</div>
             <div className="pipeline-step">
               <div className="step-icon">🗣️</div>
               <div className="step-info">
-                <div className="step-name">Expression</div>
-                <div className="step-desc">Add action & expression options</div>
+                <div className="step-name">College Assessment</div>
+                <div className="step-desc">Diverse evaluation methods</div>
               </div>
             </div>
             <div className="pipeline-arrow">→</div>
@@ -153,7 +153,7 @@ function App() {
               <div className="step-icon">📤</div>
               <div className="step-info">
                 <div className="step-name">Export</div>
-                <div className="step-desc">Download final lesson</div>
+                <div className="step-desc">Download academic lesson</div>
               </div>
             </div>
           </div>
@@ -162,17 +162,17 @@ function App() {
         <div className="hero-stats">
           <div className="stat-item">
             <span className="stat-number">6</span>
-            <span className="stat-label">Pipeline Stages</span>
+            <span className="stat-label">Enhancement Stages</span>
           </div>
           <div className="stat-divider"></div>
           <div className="stat-item">
-            <span className="stat-number">100%</span>
-            <span className="stat-label">UDL Compliant</span>
+            <span className="stat-number">College</span>
+            <span className="stat-label">Focused Content</span>
           </div>
           <div className="stat-divider"></div>
           <div className="stat-item">
-            <span className="stat-number">Live</span>
-            <span className="stat-label">WYSIWYG Editor</span>
+            <span className="stat-number">Research</span>
+            <span className="stat-label">Based Learning</span>
           </div>
         </div>
       </header>

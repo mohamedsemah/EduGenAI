@@ -8,10 +8,11 @@ const LessonForm = () => {
     topic: '',
     chapter: '',
     lesson_title: '',
-    grade_level: '',
+    grade_level: 'College', // Fixed to College
     learning_objectives: '',
     duration: '',
     complexity_level: 5,
+    course_level: 'undergraduate', // New field for course level
     file: null
   });
 
@@ -75,12 +76,12 @@ const LessonForm = () => {
 
   const simulateProgress = () => {
     const steps = [
-      { step: 'Analyzing your requirements...', progress: 15, time: 2000 },
-      { step: 'Generating AI-powered content...', progress: 35, time: 3000 },
-      { step: 'Creating detailed explanations...', progress: 55, time: 4000 },
-      { step: 'Adding interactive elements...', progress: 70, time: 2500 },
-      { step: 'Applying UDL principles...', progress: 85, time: 2000 },
-      { step: 'Finalizing presentation...', progress: 95, time: 1500 },
+      { step: 'Analyzing course requirements...', progress: 15, time: 2000 },
+      { step: 'Generating college-level content...', progress: 35, time: 3000 },
+      { step: 'Creating detailed academic explanations...', progress: 55, time: 4000 },
+      { step: 'Adding interactive learning elements...', progress: 70, time: 2500 },
+      { step: 'Applying UDL principles for adult learners...', progress: 85, time: 2000 },
+      { step: 'Finalizing professional presentation...', progress: 95, time: 1500 },
       { step: 'Complete!', progress: 100, time: 500 }
     ];
 
@@ -129,25 +130,25 @@ const LessonForm = () => {
     }
   };
 
-  const gradeOptions = [
-    "K", "1", "2", "3", "4", "5", "6", "7", "8",
-    "9", "10", "11", "12",
-    "College Freshman", "College Sophomore", "College Junior", "College Senior",
-    "Graduate"
+  const courseLevelOptions = [
+    { value: 'undergraduate_intro', label: 'Undergraduate - Introductory (100-200 level)' },
+    { value: 'undergraduate_intermediate', label: 'Undergraduate - Intermediate (300 level)' },
+    { value: 'undergraduate_advanced', label: 'Undergraduate - Advanced (400 level)' },
+    { value: 'graduate_masters', label: 'Graduate - Master\'s Level' },
+    { value: 'graduate_doctoral', label: 'Graduate - Doctoral Level' },
+    { value: 'professional', label: 'Professional Development/Continuing Education' }
   ];
 
-  const getGradeCategory = (gradeLevel) => {
-    const grade = gradeLevel.toLowerCase();
-    if (['k', '1', '2', '3', '4', '5'].includes(grade) || grade.includes('elementary')) {
-      return 'Elementary (K-5)';
-    } else if (['6', '7', '8'].includes(grade) || grade.includes('middle')) {
-      return 'Middle School (6-8)';
-    } else if (['9', '10', '11', '12'].includes(grade) || grade.includes('high')) {
-      return 'High School (9-12)';
-    } else if (grade.includes('college') || grade.includes('university') || grade.includes('graduate')) {
-      return 'University Level';
-    }
-    return 'Not specified';
+  const getCourseLevelDescription = (courseLevel) => {
+    const descriptions = {
+      'undergraduate_intro': 'Foundational concepts, broad overview, basic terminology',
+      'undergraduate_intermediate': 'Building on fundamentals, connecting concepts, practical applications',
+      'undergraduate_advanced': 'Complex analysis, advanced theories, independent thinking',
+      'graduate_masters': 'Research-based, critical analysis, professional application',
+      'graduate_doctoral': 'Cutting-edge research, original thinking, scholarly discourse',
+      'professional': 'Practical skills, real-world application, career enhancement'
+    };
+    return descriptions[courseLevel] || '';
   };
 
   return (
@@ -163,13 +164,13 @@ const LessonForm = () => {
             </div>
           </div>
         </div>
-        <h2>Create Your Enhanced UDL Lesson</h2>
-        <p>Generate detailed, accessible lesson content with AI-powered customization</p>
+        <h2>Create Your College-Level UDL Lesson</h2>
+        <p>Generate comprehensive, accessible instructional content designed specifically for higher education</p>
         <div className="feature-badges">
-          <span className="badge">🧠 AI-Powered</span>
+          <span className="badge">🎓 College-Focused</span>
           <span className="badge">♿ UDL Compliant</span>
-          <span className="badge">🎨 Visual Rich</span>
-          <span className="badge">📊 Data-Driven</span>
+          <span className="badge">📚 Research-Based</span>
+          <span className="badge">🧠 Critical Thinking</span>
         </div>
       </div>
 
@@ -177,13 +178,13 @@ const LessonForm = () => {
         <div className="form-section">
           <h3 className="section-title">
             <span className="section-icon">📚</span>
-            Basic Information
+            Course Information
           </h3>
 
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="topic">
-                Topic <span className="required">*</span>
+                Subject Area <span className="required">*</span>
               </label>
               <div className="input-wrapper">
                 <input
@@ -193,17 +194,17 @@ const LessonForm = () => {
                   value={formData.topic}
                   onChange={handleChange}
                   required
-                  placeholder="e.g., Photosynthesis, American Revolution, Algebra"
+                  placeholder="e.g., Organic Chemistry, Macroeconomics, Data Structures"
                   className="premium-input"
                 />
                 <div className="input-highlight"></div>
               </div>
-              <small>The main subject area for your lesson</small>
+              <small>The main academic discipline or subject area</small>
             </div>
 
             <div className="form-group">
               <label htmlFor="chapter">
-                Chapter/Unit <span className="required">*</span>
+                Course Module/Unit <span className="required">*</span>
               </label>
               <div className="input-wrapper">
                 <input
@@ -213,12 +214,12 @@ const LessonForm = () => {
                   value={formData.chapter}
                   onChange={handleChange}
                   required
-                  placeholder="e.g., Plant Biology, Colonial America, Linear Equations"
+                  placeholder="e.g., Molecular Structure, Market Analysis, Algorithm Design"
                   className="premium-input"
                 />
                 <div className="input-highlight"></div>
               </div>
-              <small>The specific chapter or unit this lesson belongs to</small>
+              <small>The specific course module, unit, or chapter</small>
             </div>
           </div>
 
@@ -235,7 +236,7 @@ const LessonForm = () => {
                   value={formData.lesson_title}
                   onChange={handleChange}
                   required
-                  placeholder="e.g., How Plants Make Food, The Boston Tea Party"
+                  placeholder="e.g., Stereochemistry in Drug Design, Game Theory Applications"
                   className="premium-input"
                 />
                 <div className="input-highlight"></div>
@@ -245,7 +246,7 @@ const LessonForm = () => {
 
             <div className="form-group">
               <label htmlFor="duration">
-                Duration <span className="required">*</span>
+                Class Duration <span className="required">*</span>
               </label>
               <div className="input-wrapper">
                 <input
@@ -255,39 +256,39 @@ const LessonForm = () => {
                   value={formData.duration}
                   onChange={handleChange}
                   required
-                  placeholder="e.g., 45 minutes, 1 hour, 90 minutes"
+                  placeholder="e.g., 75 minutes, 2 hours, 3-hour seminar"
                   className="premium-input"
                 />
                 <div className="input-highlight"></div>
               </div>
-              <small>How long will this lesson take to complete?</small>
+              <small>Duration of the class session</small>
             </div>
           </div>
 
           <div className="form-group">
-            <label htmlFor="grade_level">
-              Grade Level <span className="required">*</span>
+            <label htmlFor="course_level">
+              Course Level <span className="required">*</span>
             </label>
             <div className="select-wrapper">
               <select
-                id="grade_level"
-                name="grade_level"
-                value={formData.grade_level}
+                id="course_level"
+                name="course_level"
+                value={formData.course_level}
                 onChange={handleChange}
                 required
                 className="premium-select"
               >
-                <option value="">Select Grade Level</option>
-                {gradeOptions.map(grade => (
-                  <option key={grade} value={grade}>{grade}</option>
+                <option value="">Select Course Level</option>
+                {courseLevelOptions.map(option => (
+                  <option key={option.value} value={option.value}>{option.label}</option>
                 ))}
               </select>
               <div className="select-arrow">▼</div>
             </div>
-            {formData.grade_level && (
+            {formData.course_level && (
               <div className="grade-category-badge">
-                <span className="category-label">Category:</span>
-                <span className="category-value">{getGradeCategory(formData.grade_level)}</span>
+                <span className="category-label">Focus:</span>
+                <span className="category-value">{getCourseLevelDescription(formData.course_level)}</span>
               </div>
             )}
           </div>
@@ -296,7 +297,7 @@ const LessonForm = () => {
         <div className="form-section">
           <h3 className="section-title">
             <span className="section-icon">🎯</span>
-            Learning Objectives
+            Learning Outcomes
           </h3>
 
           <div className="form-group">
@@ -310,13 +311,64 @@ const LessonForm = () => {
                 value={formData.learning_objectives}
                 onChange={handleChange}
                 required
-                placeholder="Enter each learning objective on a new line, e.g.:&#10;Students will understand the process of photosynthesis&#10;Students will identify the materials needed for photosynthesis&#10;Students will explain the importance of photosynthesis to life on Earth"
+                placeholder="Enter each learning objective on a new line, e.g.:&#10;Students will analyze the relationship between molecular structure and biological activity&#10;Students will evaluate different approaches to drug design using stereochemical principles&#10;Students will synthesize knowledge to predict molecular behavior in biological systems"
                 rows="6"
                 className="premium-textarea"
               />
               <div className="textarea-highlight"></div>
             </div>
-            <small>Enter each learning objective on a separate line. Be specific and measurable.</small>
+            <small>Enter specific, measurable learning objectives. Use action verbs like analyze, evaluate, synthesize, create.</small>
+          </div>
+        </div>
+
+        <div className="form-section">
+          <h3 className="section-title">
+            <span className="section-icon">⚙️</span>
+            Content Complexity
+          </h3>
+
+          <div className="complexity-section">
+            <div className="complexity-header">
+              <label htmlFor="complexity_level">
+                Academic Rigor Level: <span className="complexity-value">{formData.complexity_level}/10</span>
+              </label>
+            </div>
+
+            <input
+              type="range"
+              id="complexity_level"
+              name="complexity_level"
+              min="3"
+              max="10"
+              value={formData.complexity_level}
+              onChange={handleChange}
+              className="complexity-slider"
+            />
+
+            <div className="complexity-description">
+              <div className="complexity-badge" style={{
+                backgroundColor:
+                  formData.complexity_level <= 4 ? '#3b82f6' :
+                  formData.complexity_level <= 6 ? '#667eea' :
+                  formData.complexity_level <= 8 ? '#8b5cf6' : '#ef4444'
+              }}>
+                {formData.complexity_level <= 4 ? 'Foundational' :
+                 formData.complexity_level <= 6 ? 'Intermediate' :
+                 formData.complexity_level <= 8 ? 'Advanced' : 'Expert'}
+              </div>
+
+              <div className="time-estimate">
+                <span className="time-icon">⏱️</span>
+                <span>Est. {20 + formData.complexity_level * 3} min generation</span>
+              </div>
+            </div>
+
+            <div className="complexity-labels">
+              <span>Foundational</span>
+              <span>Intermediate</span>
+              <span>Advanced</span>
+              <span>Expert</span>
+            </div>
           </div>
         </div>
 
@@ -328,7 +380,7 @@ const LessonForm = () => {
 
           <div className="form-group">
             <label htmlFor="file">
-              Supporting Material (optional)
+              Course Material (optional)
             </label>
             <div className="file-upload-area">
               <input
@@ -358,14 +410,14 @@ const LessonForm = () => {
                 ) : (
                   <div className="file-placeholder">
                     <span className="upload-icon">📤</span>
-                    <span className="upload-text">Click to upload or drag and drop</span>
-                    <span className="upload-formats">PDF, Word, Text, or Image files (Max 10MB)</span>
+                    <span className="upload-text">Upload course materials</span>
+                    <span className="upload-formats">Syllabus, readings, research papers, or reference materials (Max 10MB)</span>
                   </div>
                 )}
               </div>
             </div>
             <small>
-              Upload any relevant document, image, or material to incorporate into the lesson
+              Upload relevant course materials, research papers, or reference documents to enhance the lesson
             </small>
           </div>
         </div>
@@ -376,12 +428,12 @@ const LessonForm = () => {
               {loading ? (
                 <>
                   <div className="btn-spinner"></div>
-                  Generating Enhanced Lesson...
+                  Generating College Lesson...
                 </>
               ) : (
                 <>
-                  <span className="btn-icon">🚀</span>
-                  Generate Enhanced Lesson
+                  <span className="btn-icon">🎓</span>
+                  Generate College-Level Lesson
                 </>
               )}
             </span>
@@ -392,60 +444,46 @@ const LessonForm = () => {
         <div className="generation-info">
           <div className="info-header">
             <span className="info-icon">✨</span>
-            <strong>What you'll get:</strong>
+            <strong>Your college-level lesson will include:</strong>
           </div>
           <div className="info-grid">
             <div className="info-item">
               <span className="item-icon">📊</span>
-              <span>12 detailed slides with comprehensive content (200-400 words each)</span>
+              <span>12 comprehensive slides with academic depth (300-500 words each)</span>
             </div>
             <div className="info-item">
               <span className="item-icon">📚</span>
-              <span>Grade-appropriate vocabulary with definitions and examples</span>
+              <span>Advanced vocabulary with scholarly definitions and examples</span>
             </div>
             <div className="info-item">
-              <span className="item-icon">🌍</span>
-              <span>Real-world applications and case studies</span>
+              <span className="item-icon">🔬</span>
+              <span>Research-based content with current academic perspectives</span>
             </div>
             <div className="info-item">
-              <span className="item-icon">🎯</span>
-              <span>Multiple assessment formats and interaction opportunities</span>
+              <span className="item-icon">🧠</span>
+              <span>Critical thinking exercises and analytical frameworks</span>
             </div>
             <div className="info-item">
               <span className="item-icon">♿</span>
-              <span>Complete accessibility features following UDL principles</span>
+              <span>UDL accessibility features designed for adult learners</span>
             </div>
             <div className="info-item">
-              <span className="item-icon">🖼️</span>
-              <span>AI-generated images relevant to your topic</span>
+              <span className="item-icon">🎯</span>
+              <span>Multiple assessment strategies aligned with learning objectives</span>
             </div>
             <div className="info-item">
               <span className="item-icon">📝</span>
-              <span>Detailed presenter notes for each slide</span>
+              <span>Detailed instructor notes with pedagogical guidance</span>
             </div>
             <div className="info-item">
-              <span className="item-icon">🎨</span>
-              <span>Professional design with consistent branding</span>
+              <span className="item-icon">🌐</span>
+              <span>Professional design suitable for academic presentations</span>
             </div>
           </div>
         </div>
       </form>
 
-      <style jsx>{`
-        .lesson-form-single-column {
-          display: block;
-          gap: 0;
-        }
-        
-        .lesson-form-single-column .form-section {
-          margin-bottom: 3rem;
-        }
-        
-        .lesson-form-single-column .form-actions {
-          margin-top: 2rem;
-        }
-      `}</style>
-
+      {/* Rest of the component remains the same */}
       {loading && (
         <LoadingSpinner
           progress={progress}

@@ -11,18 +11,19 @@ const PipelineInterface = () => {
     topic: '',
     chapter: '',
     lesson_title: '',
-    grade_level: '',
+    grade_level: 'College', // Fixed to College
+    course_level: 'undergraduate_intro', // New field
     learning_objectives: '',
     duration: '',
     file: null
   });
 
   const stages = [
-    { id: 'form', name: 'Setup', icon: '📝', description: 'Create your lesson parameters' },
-    { id: 'baseline', name: 'Baseline', icon: '📚', description: 'Review initial lesson content' },
-    { id: 'engagement', name: 'Engagement', icon: '🎯', description: 'Add UDL engagement principles' },
-    { id: 'representation', name: 'Representation', icon: '👁️', description: 'Add multiple representation modes' },
-    { id: 'action_expression', name: 'Action & Expression', icon: '🗣️', description: 'Add expression options' },
+    { id: 'form', name: 'Setup', icon: '📝', description: 'Define course parameters' },
+    { id: 'baseline', name: 'Baseline', icon: '📚', description: 'Review initial academic content' },
+    { id: 'engagement', name: 'Engagement', icon: '🎯', description: 'Add UDL engagement for adult learners' },
+    { id: 'representation', name: 'Representation', icon: '👁️', description: 'Add multiple learning modalities' },
+    { id: 'action_expression', name: 'Action & Expression', icon: '🗣️', description: 'Add diverse assessment options' },
     { id: 'export', name: 'Export', icon: '📤', description: 'Download your lesson' }
   ];
 
@@ -82,7 +83,6 @@ const PipelineInterface = () => {
 
       const data = await response.json();
       if (data.success) {
-        // Update local state
         const updatedContent = { ...lessonContent };
         updatedContent.slides[slideIndex] = updatedSlide;
         setLessonContent(updatedContent);
@@ -105,7 +105,6 @@ const PipelineInterface = () => {
 
       const data = await response.json();
       if (data.success) {
-        // Update local state
         const updatedContent = { ...lessonContent };
         updatedContent.slides[slideIndex] = data.slide;
         setLessonContent(updatedContent);
@@ -121,7 +120,6 @@ const PipelineInterface = () => {
 
     if (!nextStage) return;
 
-    // If moving to a UDL stage, apply the principle
     if (['engagement', 'representation', 'action_expression'].includes(nextStage.id)) {
       setLoading(true);
       try {
@@ -159,7 +157,6 @@ const PipelineInterface = () => {
 
       const data = await response.json();
       if (data.success) {
-        // Open download link
         window.open(`http://localhost:8000${data.download_url}`, '_blank');
         setCurrentStage('export');
       } else {
@@ -200,35 +197,44 @@ const PipelineInterface = () => {
   };
 
   const renderFormStage = () => {
+    const courseLevelOptions = [
+      { value: 'undergraduate_intro', label: 'Undergraduate - Introductory' },
+      { value: 'undergraduate_intermediate', label: 'Undergraduate - Intermediate' },
+      { value: 'undergraduate_advanced', label: 'Undergraduate - Advanced' },
+      { value: 'graduate_masters', label: 'Graduate - Master\'s Level' },
+      { value: 'graduate_doctoral', label: 'Graduate - Doctoral Level' },
+      { value: 'professional', label: 'Professional Development' }
+    ];
+
     return (
       <div className="form-stage">
         <div className="stage-header">
-          <h2>🚀 Create Your Lesson</h2>
-          <p>Set up the basic parameters for your lesson. We'll generate a baseline version first, then enhance it with UDL principles.</p>
+          <h2>🎓 Create Your College Lesson</h2>
+          <p>Design comprehensive, research-based instructional content for higher education. We'll generate an academic baseline, then enhance it with UDL principles optimized for adult learners.</p>
         </div>
 
         <form onSubmit={handleFormSubmit} className="lesson-form">
           <div className="form-section full-width">
-            <h3>Basic Information</h3>
+            <h3>Course Information</h3>
             <div className="form-row">
               <div className="form-group">
-                <label>Topic *</label>
+                <label>Subject Area *</label>
                 <input
                   type="text"
                   value={formData.topic}
                   onChange={(e) => setFormData({...formData, topic: e.target.value})}
                   required
-                  placeholder="e.g., Photosynthesis, American Revolution"
+                  placeholder="e.g., Organic Chemistry, Macroeconomics, Data Structures"
                 />
               </div>
               <div className="form-group">
-                <label>Chapter/Unit *</label>
+                <label>Course Module/Unit *</label>
                 <input
                   type="text"
                   value={formData.chapter}
                   onChange={(e) => setFormData({...formData, chapter: e.target.value})}
                   required
-                  placeholder="e.g., Plant Biology, Colonial America"
+                  placeholder="e.g., Molecular Structure, Market Analysis, Algorithm Design"
                 />
               </div>
             </div>
@@ -241,43 +247,32 @@ const PipelineInterface = () => {
                   value={formData.lesson_title}
                   onChange={(e) => setFormData({...formData, lesson_title: e.target.value})}
                   required
-                  placeholder="e.g., How Plants Make Food"
+                  placeholder="e.g., Stereochemistry in Drug Design, Game Theory Applications"
                 />
               </div>
               <div className="form-group">
-                <label>Duration *</label>
+                <label>Class Duration *</label>
                 <input
                   type="text"
                   value={formData.duration}
                   onChange={(e) => setFormData({...formData, duration: e.target.value})}
                   required
-                  placeholder="e.g., 45 minutes, 1 hour"
+                  placeholder="e.g., 75 minutes, 2 hours, 3-hour seminar"
                 />
               </div>
             </div>
 
             <div className="form-group">
-              <label>Grade Level *</label>
+              <label>Course Level *</label>
               <select
-                value={formData.grade_level}
-                onChange={(e) => setFormData({...formData, grade_level: e.target.value})}
+                value={formData.course_level}
+                onChange={(e) => setFormData({...formData, course_level: e.target.value})}
                 required
               >
-                <option value="">Select Grade Level</option>
-                <option value="K">Kindergarten</option>
-                <option value="1">1st Grade</option>
-                <option value="2">2nd Grade</option>
-                <option value="3">3rd Grade</option>
-                <option value="4">4th Grade</option>
-                <option value="5">5th Grade</option>
-                <option value="6">6th Grade</option>
-                <option value="7">7th Grade</option>
-                <option value="8">8th Grade</option>
-                <option value="9">9th Grade</option>
-                <option value="10">10th Grade</option>
-                <option value="11">11th Grade</option>
-                <option value="12">12th Grade</option>
-                <option value="College">College</option>
+                <option value="">Select Course Level</option>
+                {courseLevelOptions.map(option => (
+                  <option key={option.value} value={option.value}>{option.label}</option>
+                ))}
               </select>
             </div>
 
@@ -288,24 +283,24 @@ const PipelineInterface = () => {
                 onChange={(e) => setFormData({...formData, learning_objectives: e.target.value})}
                 required
                 rows="4"
-                placeholder="Enter each learning objective on a new line..."
+                placeholder="Enter each learning objective on a new line. Use action verbs like analyze, evaluate, synthesize, create..."
               />
             </div>
 
             <div className="form-group">
-              <label>Supporting Material (optional)</label>
+              <label>Course Material (optional)</label>
               <input
                 type="file"
                 onChange={(e) => setFormData({...formData, file: e.target.files[0]})}
                 accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png"
               />
-              <small>Upload any relevant document, image, or material</small>
+              <small>Upload syllabus, readings, research papers, or reference materials</small>
             </div>
           </div>
 
           <div className="form-actions">
             <button type="submit" disabled={loading} className="btn-primary">
-              {loading ? 'Generating Baseline...' : 'Generate Baseline Lesson'}
+              {loading ? 'Generating Academic Content...' : 'Generate College Lesson'}
             </button>
           </div>
         </form>
@@ -330,7 +325,7 @@ const PipelineInterface = () => {
             <div className="udl-info">
               <div className="udl-principle-applied">
                 <span className="udl-icon">✨</span>
-                <span>UDL {stageInfo.name} principles have been applied to all slides</span>
+                <span>UDL {stageInfo.name} principles for adult learners have been applied</span>
               </div>
             </div>
           )}
@@ -340,9 +335,10 @@ const PipelineInterface = () => {
           <div className="lesson-meta">
             <h3>{lessonContent.title}</h3>
             <div className="lesson-details">
-              <span className="detail-item">📚 {lessonContent.grade_level}</span>
+              <span className="detail-item">🎓 College Level</span>
               <span className="detail-item">⏱️ {lessonContent.duration}</span>
               <span className="detail-item">📄 {lessonContent.slides.length} slides</span>
+              <span className="detail-item">🧠 Academic Rigor</span>
             </div>
           </div>
 
@@ -350,8 +346,8 @@ const PipelineInterface = () => {
             <div className="baseline-notice">
               <div className="notice-icon">💡</div>
               <div className="notice-content">
-                <strong>Baseline Version Ready!</strong>
-                <p>Review and edit your slides below. Click "Next" to enhance with UDL Engagement principles.</p>
+                <strong>Academic Baseline Ready!</strong>
+                <p>Review and edit your college-level content below. Click "Next" to enhance with UDL Engagement principles designed for adult learners.</p>
               </div>
             </div>
           )}
@@ -372,7 +368,7 @@ const PipelineInterface = () => {
         <div className="stage-actions">
           {canExport && (
             <button onClick={handleExport} className="btn-export" disabled={loading}>
-              {loading ? 'Exporting...' : '📤 Export Final Lesson'}
+              {loading ? 'Exporting...' : '📤 Export College Lesson'}
             </button>
           )}
 
@@ -390,9 +386,9 @@ const PipelineInterface = () => {
     return (
       <div className="export-stage">
         <div className="success-animation">
-          <div className="success-icon">🎉</div>
-          <h2>Lesson Complete!</h2>
-          <p>Your UDL-enhanced lesson has been successfully created and exported.</p>
+          <div className="success-icon">🎓</div>
+          <h2>College Lesson Complete!</h2>
+          <p>Your UDL-enhanced academic lesson has been successfully created with college-level content and adult learning principles.</p>
         </div>
 
         <div className="completion-summary">
@@ -400,23 +396,23 @@ const PipelineInterface = () => {
           <div className="accomplishment-list">
             <div className="accomplishment-item">
               <span className="accomplishment-icon">📚</span>
-              <span>Generated baseline lesson content</span>
+              <span>Generated research-based academic content</span>
             </div>
             <div className="accomplishment-item">
               <span className="accomplishment-icon">🎯</span>
-              <span>Applied UDL Engagement principles</span>
+              <span>Applied UDL Engagement principles for adult learners</span>
             </div>
             <div className="accomplishment-item">
               <span className="accomplishment-icon">👁️</span>
-              <span>Added multiple representation modes</span>
+              <span>Added multiple learning modalities for diverse backgrounds</span>
             </div>
             <div className="accomplishment-item">
               <span className="accomplishment-icon">🗣️</span>
-              <span>Included action & expression options</span>
+              <span>Included diverse assessment and expression options</span>
             </div>
             <div className="accomplishment-item">
               <span className="accomplishment-icon">✏️</span>
-              <span>Made personalized edits and improvements</span>
+              <span>Made personalized edits for your specific course</span>
             </div>
           </div>
         </div>
@@ -425,15 +421,15 @@ const PipelineInterface = () => {
           <h3>Next Steps:</h3>
           <div className="next-step-item">
             <span className="step-number">1</span>
-            <span>Review your downloaded PowerPoint presentation</span>
+            <span>Review your downloaded presentation for academic accuracy</span>
           </div>
           <div className="next-step-item">
             <span className="step-number">2</span>
-            <span>Customize further based on your specific classroom needs</span>
+            <span>Customize further based on your institutional requirements</span>
           </div>
           <div className="next-step-item">
             <span className="step-number">3</span>
-            <span>Deliver your inclusive, accessible lesson!</span>
+            <span>Deliver your inclusive, research-based college lesson!</span>
           </div>
         </div>
 
@@ -446,7 +442,8 @@ const PipelineInterface = () => {
               topic: '',
               chapter: '',
               lesson_title: '',
-              grade_level: '',
+              grade_level: 'College',
+              course_level: 'undergraduate_intro',
               learning_objectives: '',
               duration: '',
               file: null
@@ -454,7 +451,7 @@ const PipelineInterface = () => {
           }}
           className="btn-new-lesson"
         >
-          Create Another Lesson
+          Create Another College Lesson
         </button>
       </div>
     );
